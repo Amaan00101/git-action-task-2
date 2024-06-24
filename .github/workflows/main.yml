@@ -4,16 +4,12 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'abc/**'
-      - '123/**'
 
 jobs:
   folder_abc:
+    if: contains(github.event.head_commit.modified, 'abc/*')
     runs-on: ubuntu-latest
-    name: abc Folder Workflow
-    env:
-      changes_abc: ${{ startsWith(github.event.head_commit.modified, 'abc/**') }}
+    name: ABC Folder Workflow
 
     steps:
       - name: Check out repository
@@ -21,16 +17,11 @@ jobs:
 
       - name: Debug Modified Files
         run: echo "Performing actions for changes in abc folder"
-
-      - name: Echo changes in abc folder
-        if: ${{ env.changes_abc == 'true' }}
-        run: echo "Changes detected in abc folder"
-
+  
   folder_123:
+    if: ${{ contains(github.event.head_commit.modified, '123/*') }}
     runs-on: ubuntu-latest
     name: 123 Folder Workflow
-    env:
-      changes_123: ${{ startsWith(github.event.head_commit.modified, '123/**') }}
 
     steps:
       - name: Check out repository
@@ -38,7 +29,3 @@ jobs:
 
       - name: Debug Modified Files
         run: echo "Performing actions for changes in 123 folder"
-
-      - name: Echo changes in 123 folder
-        if: ${{ env.changes_123 == 'true' }}
-        run: echo "Changes detected in 123 folder"
