@@ -1,30 +1,29 @@
-name: Directory-specific Actions
+name: Folder-specific Workflows
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'abc/**'
-      - '123/**'
 
 jobs:
-  abc_changes:
-    if: ${{ startsWith(github.event.head_commit.modified, 'abc/') }}
+  folder_abc:
+    if: ${{ contains(github.event.head_commit.modified, 'abc/') }}
     runs-on: ubuntu-latest
+    name: abc Folder Workflow
+
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Run actions for abc folder
-        run: echo "abc running"
-
-  folder_123_changes:
-    if: ${{ startsWith(github.event.head_commit.modified, '123/') }}
+      - run: echo "Performing actions for changes in abc folder"
+  
+  folder_123:
+    if: ${{ contains(github.event.head_commit.modified, '123/') }}
     runs-on: ubuntu-latest
+    name: 123 Folder Workflow
+
     steps:
-      - name: Checkout repository
+      - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Run actions for 123 folder
-        run: echo "abc running"
+      - run: echo "Performing actions for changes in 123 folder"
