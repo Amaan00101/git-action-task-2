@@ -9,26 +9,26 @@ on:
       - '123/**'
 
 jobs:
-  abc-file:
-    name: changes in abc
-    runs-on: ubuntu-latest
+  - abc-file:
+      name: changes in abc
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
 
-      - name: Example Step
-        run: echo "Performing actions for changes in abc folder"
+        - name: Example Step
+          run: echo "Performing actions for changes in abc folder"
 
 
-  123-file :
-    name: changes in 123 
-    runs-on: ubuntu-latest
+  - 123-file :
+      name: changes in 123 
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
 
-      - name: Example Step
-        run: echo "Performing actions for changes in 123 folder"
+        - name: Example Step
+          run: echo "Performing actions for changes in 123 folder"
 
