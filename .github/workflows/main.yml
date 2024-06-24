@@ -7,7 +7,7 @@ on:
 
 jobs:
   folder_abc:
-    # if: ${{ contains(github.event.head_commit.modified, 'abc/*') }}
+    if: contains(github.event.head_commit.modified, 'abc/*')
     runs-on: ubuntu-latest
     name: ABC Folder Workflow
 
@@ -19,7 +19,7 @@ jobs:
         run: echo "Performing actions for changes in abc folder"
   
   folder_123:
-    # if: ${{ contains(github.event.head_commit.modified, '123/*') }}
+    if: contains(github.event.head_commit.modified, '123/*')
     runs-on: ubuntu-latest
     name: 123 Folder Workflow
 
