@@ -1,36 +1,27 @@
-name: actions
+name: Directory-specific Actions
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'abc/**'
-      - '123/**'
 
 jobs:
-  abc_job:
-    name: changes in abc
+  abc_changes:
+    if: ${{ contains(github.event.head_commit.modified, 'abc/') }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: execute
-        if: github.event_name == 'push' && startsWith(github.event.compare, 'refs/heads/main')
+      - name: Run actions for abc folder
+        run: echo "changes mane in abc folder"
 
-      - name: Example Step
-        run: echo "Performing actions for changes in abc folder"
-
-
-  folder_123_job: 
-    name: changes in 123 
+  123_changes:
+    if: ${{ contains(github.event.head_commit.modified, '123/') }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Example Step
-        run: echo "Performing actions for changes in 123 folder"
+      - name: Run actions for 123 folder
+        run: echo "changes mane in 123 folder"
