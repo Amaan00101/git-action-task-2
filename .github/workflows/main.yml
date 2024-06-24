@@ -6,24 +6,31 @@ on:
       - main
 
 jobs:
-  folder_abc:
-    if: ${{ contains(github.event.head_commit.modified, 'abc/**') }}
+  folder_123:
+    if: ${{ contains(github.event.head_commit.modified, 'abc/*') }}
     runs-on: ubuntu-latest
-    name: abc Folder Workflow
+    name: ABC Folder Workflow
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Debug Modified Files
+        run: echo "Modified files: ${{ github.event.head_commit.modified }}"
+
+      # Add steps specific to changes in abc folder
       - run: echo "Performing actions for changes in abc folder"
   
   folder_123:
-    if: ${{ contains(github.event.head_commit.modified, '123/**') }}
+    if: ${{ contains(github.event.head_commit.modified, '123/*') }}
     runs-on: ubuntu-latest
     name: 123 Folder Workflow
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+
+      - name: Debug Modified Files
+        run: echo "Modified files: ${{ github.event.head_commit.modified }}"
 
       - run: echo "Performing actions for changes in 123 folder"
