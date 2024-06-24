@@ -1,4 +1,24 @@
-name: changes in files
+name: Folder Sync
 
 on:
   push:
+    paths:
+      - 'abc/**'   # Trigger on changes in the abc folder
+      - '123/**'   # Trigger on changes in the 123 folder
+
+jobs:
+  sync-folder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      # Sync changes in abc folder
+      - name: Sync abc folder
+        if: ${{ github.event_name == 'push' && github.event_name != 'delete' && startsWith(github.ref, 'refs/heads/') }}
+        run: rsync -av --delete ./abc/ "${GITHUB_WORKSPACE}/synced_folder"
+      
+      # Sync changes in 123 folder
+      - name: Sync 123 folder
+        if: ${{ github.event_name == 'push' && github.event_name != 'delete' && startsWith(github.ref, 'refs/heads/') }}
+        run: rsync -av --delete ./123/ "${GITHUB_WORKSPACE}/synced_folder"
