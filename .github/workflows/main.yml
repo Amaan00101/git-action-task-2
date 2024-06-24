@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  folder_123:
+  folder_abc:
     if: ${{ contains(github.event.head_commit.modified, 'abc/*') }}
     runs-on: ubuntu-latest
     name: ABC Folder Workflow
