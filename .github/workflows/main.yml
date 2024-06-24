@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: abc Folder Workflow
     env:
-      changes_abc: ${{ startsWith(github.event.head_commit.modified, 'abc/*') }}
+      changes_abc: ${{ startsWith(github.event.head_commit.modified, 'abc/**') }}
 
     steps:
       - name: Check out repository
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     name: 123 Folder Workflow
     env:
-      changes_123: ${{ startsWith(github.event.head_commit.modified, '123/') }}
+      changes_123: ${{ startsWith(github.event.head_commit.modified, '123/**') }}
 
     steps:
       - name: Check out repository
