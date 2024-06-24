@@ -16,10 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Debug Modified Files
-        run: echo "Modified files: ${{ github.event.head_commit.modified }}"
-
-      # Add steps specific to changes in abc folder
-      - run: echo "Performing actions for changes in abc folder"
+        run: echo "Performing actions for changes in abc folder"
   
   folder_123:
     if: ${{ contains(github.event.head_commit.modified, '123/*') }}
@@ -31,6 +28,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Debug Modified Files
-        run: echo "Modified files: ${{ github.event.head_commit.modified }}"
-
-      - run: echo "Performing actions for changes in 123 folder"
+        run: echo "Performing actions for changes in 123 folder"
