@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - 'abc'
-      - '123'
     path:
       - 'abc/*'
-      - '123/*'
 
 jobs:
   trigger-branch:
@@ -22,6 +20,13 @@ jobs:
         run: |
           echo "Executing actions for abc/ branch"
           # Your actions for abc/a1 branch go here
+
+on:
+  push:
+    branches:
+      - '123'
+    path:
+      - '123/*'
 
       # Add your specific actions here for 123/ branch
       - name: Action for 123/ branch
