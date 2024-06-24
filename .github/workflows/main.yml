@@ -10,9 +10,14 @@ on:
 
 jobs:
   folder_abc:
-    if: contains(github.event.head_commit.modified, 'abc/**')
+    env:
+      changes_abc: contains(github.event.head_commit.modified, 'abc/**')
+    run: |
+      if [ "$changes_abc" = "true" ]; then
+        echo "changes done in abc folder"
+      fi
     runs-on: ubuntu-latest
-    name: ABC Folder Workflow
+    name: abc Folder Workflow
 
     steps:
       - name: Check out repository
@@ -22,7 +27,12 @@ jobs:
         run: echo "Performing actions for changes in abc folder"
   
   folder_123:
-    if: contains(github.event.head_commit.modified, '123/**')
+    env:
+      changes_123: contains(github.event.head_commit.modified, '123/**')
+    run: |
+      if [ "$changes_123" = "true" ]; then
+        echo "changes done in 123 folder"
+      fi
     runs-on: ubuntu-latest
     name: 123 Folder Workflow
 
