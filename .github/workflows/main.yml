@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      # # Add your specific actions here for abc/a1 branchh
+      # # Add your specific actions here for abc/a1 branch
       # - name: Action for abc/ branch
       #   if: github.ref == 'refs/heads/abc/**'
       #   run: |
