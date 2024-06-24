@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run actions for abc folder
-        # Add your actions specific to abc folder here
+        run: echo "abc running"
 
   folder_123_changes:
     if: ${{ startsWith(github.event.head_commit.modified, '123/') }}
@@ -27,4 +27,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run actions for 123 folder
-        # Add your actions specific to 123 folder here
+        run: echo "abc running"
