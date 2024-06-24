@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '123/**'
-      
+      - '123/**'  # Trigger on any changes within the 123 folder and its subfolders
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,9 +15,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Print changed files in 123 folder
+      - name: List changed files in 123 folder
         run: |
           git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^123/' | while read filename; do
             echo "Changed file: $filename"
-            # Add your additional actions for each changed file here
           done
