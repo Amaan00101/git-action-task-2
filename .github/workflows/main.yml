@@ -2,23 +2,27 @@ name: Folder Sync
 
 on:
   push:
-    paths:
-      - 'abc/**'   # Trigger on changes in the abc folder
-      - '123/**'   # Trigger on changes in the 123 folderrr
+    branches:
+      - 'abc/**'
+      - '123/**'
 
 jobs:
-  sync-folder:
+  trigger-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
       
-      # Sync changes in abc folder
-      - name: Sync abc folder
-        if: ${{ github.event_name == 'push' && github.event_name != 'delete' && startsWith(github.ref, 'refs/heads/') }}
-        run: rsync -av --delete ./abc/ "${GITHUB_WORKSPACE}/synced_folder"
-      
-      # Sync changes in 123 folder
-      - name: Sync 123 folder
-        if: ${{ github.event_name == 'push' && github.event_name != 'delete' && startsWith(github.ref, 'refs/heads/') }}
-        run: rsync -av --delete ./123/ "${GITHUB_WORKSPACE}/synced_folder"
+      # Add your specific actions here for abc/a1 branch
+      - name: Action for abc/ branch
+        if: github.ref == 'refs/heads/abc/**'
+        run: |
+          echo "Executing actions for abc/a1 branch"
+          # Your actions for abc/a1 branch go here
+
+      # Add your specific actions here for 123/1.1.1 branch
+      - name: Action for 123/ branch
+        if: github.ref == 'refs/heads/123/**'
+        run: |
+          echo "Executing actions for 123/1.1.1 branch"
+          # Your actions for 123/1.1.1 branch go here
