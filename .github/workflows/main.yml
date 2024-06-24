@@ -1,0 +1,4 @@
+name: changes in files
+
+on:
+  push:
