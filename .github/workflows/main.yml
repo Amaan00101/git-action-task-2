@@ -1,0 +1,34 @@
+name: actions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'abc/**'
+      - '123/**'
+
+jobs:
+  abc file:
+    name: changes in abc
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Example Step
+        run: echo "Performing actions for changes in abc folder"
+
+
+  123 file :
+    name: changes in 123 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Example Step
+        run: echo "Performing actions for changes in 123 folder"
+
