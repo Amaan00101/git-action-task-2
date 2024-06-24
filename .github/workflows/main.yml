@@ -9,7 +9,7 @@ on:
       - '123/**'
 
 jobs:
-  abc file:
+  abc-file:
     name: changes in abc
     runs-on: ubuntu-latest
 
