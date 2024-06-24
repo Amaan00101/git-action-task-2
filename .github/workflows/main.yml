@@ -21,7 +21,7 @@ jobs:
         run: echo "Performing actions for changes in abc folder"
 
 
-  123_job:
+  folder_123_job: 
     name: changes in 123 
     runs-on: ubuntu-latest
 
