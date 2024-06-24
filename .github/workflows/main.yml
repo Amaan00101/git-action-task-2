@@ -17,6 +17,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: execute
+        if: github.event_name == 'push' && startsWith(github.event.compare, 'refs/heads/main')
+
       - name: Example Step
         run: echo "Performing actions for changes in abc folder"
 
