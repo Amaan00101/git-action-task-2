@@ -9,7 +9,7 @@ jobs:
   folder_abc:
     name: ABC Folder Workflow
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.modified 'abc/**') }}
+    if: ${{ contains(github.event.head_commit.modified, 'abc/**') }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -40,4 +40,4 @@ jobs:
       - name: Perform actions for changes in 123 folder
         run: |
           echo "changes done in 123 folder"
-          ls 123 
+          ls 123  
