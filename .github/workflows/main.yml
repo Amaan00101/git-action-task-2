@@ -6,20 +6,23 @@ on:
       - main
 
 jobs:
-  check:
-    name: Check changed files
-    outputs:
-      run_job: ${{ if [ $(git diff --name-only --diff-filter=MA -- db | wc -l) -eq $(git diff --name-only --diff-filter=MA | wc -l) ]; then 'true' else 'false' }}
+  folder_abc:
+    name: ABC Folder Workflow
     runs-on: ubuntu-latest
+    if: ${{ (github.event.head_commit.modified, 'abc/**') }}
     steps:
-      - name: Checkout code
+      - name: Check out repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-      - name: Run job if folder changed
-        if: ${{ outputs.run_job == 'true' }}
+      
+      - name: Debug Modified Files
         run: |
-          echo "Updates made to db folder"
+          echo "Modified files:"
+          echo "${{ github.event.head_commit.modified }}"
+      
+      - name: Perform actions for changes in abc folder
+        run: |
+          echo "changes done in abc folder"
+          tree abc  
 
   folder_123:
     name: 123 Folder Workflow
@@ -36,4 +39,5 @@ jobs:
       
       - name: Perform actions for changes in 123 folder
         run: |
-          ls 123  
+          echo "changes done in 123 folder"
+          ls 123 
