@@ -5,27 +5,36 @@ on:
     branches:
       - main
     paths:
-      - 'abc/a.2'
+      - 'abc/**'
       - '123/**'
 
 jobs:
   folder_abc:
     name: ABC Folder Workflow
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, 'abc/')
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      
-      - name: Debug Modified Files
+    with:
+      files: |
+        abc/**
+        '123/**'
+
+      - name: Perform action when test_directory changes
+        if: contains(steps.verify-changed-files.outputs.changed_files, 'abc/**')
         run: |
-          echo "Modified files:"
-          echo "${{ github.event.head_commit.modified }}"
+          echo "test_directory has changed."
+    # if: contains(github.event.head_commit.modified, 'abc/')
+    # steps:
+    #   - name: Check out repository
+    #     uses: actions/checkout@v2
       
-      - name: Perform actions for changes in abc folder
-        run: |
-          echo "changes done in abc folder"
-          tree abc  
+    #   - name: Debug Modified Files
+    #     run: |
+    #       echo "Modified files:"
+    #       echo "${{ github.event.head_commit.modified }}"
+      
+    #   - name: Perform actions for changes in abc folder
+    #     run: |
+    #       echo "changes done in abc folder"
+    #       tree abc  
 
   folder_123:
     name: 123 Folder Workflow
