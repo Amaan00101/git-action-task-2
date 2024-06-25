@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         folder:
-          - 'abc/**'
-          - '123/**'
+          - abc
+          - 123
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -24,10 +24,10 @@ jobs:
           echo "${{ github.event.head_commit.modified }}"
       
       - name: Perform actions for changes in folder
-        if: ${{ contains(github.event.head_commit.modified, matrix.folder) }}
+        if: ${{ contains(github.event.head_commit.modified, matrix.folder + '/') }}
         run: |
           if [[ "${{ matrix.folder }}" == "abc" ]]; then
-            echo "chnges done in abc folder"
+            tree abc
           elif [[ "${{ matrix.folder }}" == "123" ]]; then
-            echo "chnges done in 123 folder"
+            ls 123
           fi
