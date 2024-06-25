@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'abc/**'
+      - 'abc/a.2'
       - '123/**'
 
 jobs:
