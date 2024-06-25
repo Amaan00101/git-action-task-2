@@ -25,8 +25,10 @@ jobs:
 
       - name: List all changed files
         if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          for file in $ALL_CHANGED_FILES; do
             echo "changes done in abc folder"
             echo "$file was changed"
           done
@@ -47,7 +49,9 @@ jobs:
 
       - name: List all changed files
         if: steps.changed-filess.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILESS: ${{ steps.changed-filess.outputs.all_changed_filess }}
         run: |
-          for file in ${{ steps.changed-filess.outputs.all_changed_filess }}; do
+          for file in $ALL_CHANGED_FILESS; do
             echo "$file was changed"
           done
