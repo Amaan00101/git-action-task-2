@@ -45,7 +45,7 @@ jobs:
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            123/**
+            '123/**'
 
       - name: List all changed files
         if: steps.changed-filess.outputs.any_changed == 'true'
