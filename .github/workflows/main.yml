@@ -6,10 +6,14 @@ on:
       - main
 
 jobs:
-  folder_abc:
-    name: ABC Folder Workflow
+  folder_actions:
+    name: Folder-specific Actions
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.modified, 'abc/**') }}
+    strategy:
+      matrix:
+        folder:
+          - abc
+          - 123
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -19,23 +23,11 @@ jobs:
           echo "Modified files:"
           echo "${{ github.event.head_commit.modified }}"
       
-      - name: Perform actions for changes in abc folder
+      - name: Perform actions for changes in folder
+        if: ${{ contains(github.event.head_commit.modified, matrix.folder + '/') }}
         run: |
-          tree abc  
-
-  folder_123:
-    name: 123 Folder Workflow
-    runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.modified, '/123/**') }}
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Debug Modified Files
-        run: |
-          echo "Modified files:"
-          echo "${{ github.event.head_commit.modified }}"
-      
-      - name: Perform actions for changes in 123 folder
-        run: |
-          ls 123  
+          if [[ "${{ matrix.folder }}" == "abc" ]]; then
+            echo "chnges done in abc folder"
+          elif [[ "${{ matrix.folder }}" == "123" ]]; then
+            echo "chnges done in 123 folder"
+          fi
