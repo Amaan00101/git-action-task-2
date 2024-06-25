@@ -13,6 +13,9 @@ jobs:
     name: ABC Folder Workflow
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Get all changed markdown files
         id: changed-markdown-files
         uses: tj-actions/changed-files@v44
@@ -33,6 +36,9 @@ jobs:
     name: 123 Folder Workflow
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Get all changed markdown files
         id: changed-markdown-filess
         uses: tj-actions/changed-files@v44
