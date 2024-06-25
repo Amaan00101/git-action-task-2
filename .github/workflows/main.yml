@@ -9,11 +9,6 @@ jobs:
   folder_actions:
     name: Folder-specific Actions
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        folder:
-          - abc
-          - 123
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -23,11 +18,12 @@ jobs:
           echo "Modified files:"
           echo "${{ github.event.head_commit.modified }}"
       
-      - name: Perform actions for changes in folder
-        if: ${{ contains(github.event.head_commit.modified, matrix.folder + '/') }}
+      - name: Perform actions for changes in abc folder
+        if: ${{ contains(github.event.head_commit.modified, 'abc/') }}
         run: |
-          if [[ "${{ matrix.folder }}" == "abc" ]]; then
-            tree abc
-          elif [[ "${{ matrix.folder }}" == "123" ]]; then
-            ls 123
-          fi
+          tree abc  
+
+      - name: Perform actions for changes in 123 folder
+        if: ${{ contains(github.event.head_commit.modified, '123/') }}
+        run: |
+          ls 123
