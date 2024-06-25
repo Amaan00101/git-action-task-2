@@ -5,51 +5,40 @@ on:
     branches:
       - main
     paths:
-      - 'abc/**'
-      - '123/**'
+      - "abc/**"
+      - "123/**"
 
 jobs:
   folder_abc:
-    name: ABC Folder Workflow
-    runs-on: ubuntu-latest
-  with:
-    files: |
-      abc/**
-      '123/**'
+    - name: Get all changed markdown files
+        id: changed-markdown-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            'abc/**'
 
-    - name: Perform action when test_directory changes
-      if: contains(steps.verify-changed-files.outputs.changed_files, 'abc/**')
-      run: |
-        echo "test_directory has changed."
-    # if: contains(github.event.head_commit.modified, 'abc/')
-    # steps:
-    #   - name: Check out repository
-    #     uses: actions/checkout@v2
-      
-    #   - name: Debug Modified Files
-    #     run: |
-    #       echo "Modified files:"
-    #       echo "${{ github.event.head_commit.modified }}"
-      
-    #   - name: Perform actions for changes in abc folder
-    #     run: |
-    #       echo "changes done in abc folder"
-    #       tree abc  
+      - name: List all changed files markdown files
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+          done
 
   folder_123:
-    name: 123 Folder Workflow
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.modified, '123/')
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+    - name: Get all changed markdown files
+        id: changed-markdown-filess
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            '123/**'
 
-      - name: Debug Modified Files
+      - name: List all changed files markdown files
+        if: steps.changed-markdown-filess.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILESS: ${{ steps.changed-markdown-filess.outputs.all_changed_filess }}
         run: |
-          echo "Modified files:"
-          echo "${{ github.event.head_commit.modified }}"
-      
-      - name: Perform actions for changes in 123 folder
-        run: |
-          echo "changes done in 123 folder"
-          ls 123  
+          for file in ${ALL_CHANGED_FILESS}; do
+            echo "$file was changed"
+          done
