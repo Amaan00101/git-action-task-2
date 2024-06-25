@@ -10,35 +10,41 @@ on:
 
 jobs:
   folder_abc:
-    - name: Get all changed markdown files
+    name: ABC Folder Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get all changed markdown files
         id: changed-markdown-files
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            'abc/**'
+            abc/**
 
-      - name: List all changed files markdown files
+      - name: List all changed markdown files
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
         run: |
-          for file in ${ALL_CHANGED_FILES}; do
+          for file in $ALL_CHANGED_FILES; do
             echo "$file was changed"
           done
 
   folder_123:
-    - name: Get all changed markdown files
+    name: 123 Folder Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get all changed markdown files
         id: changed-markdown-filess
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            '123/**'
+            123/**
 
-      - name: List all changed files markdown files
+      - name: List all changed markdown files
         if: steps.changed-markdown-filess.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILESS: ${{ steps.changed-markdown-filess.outputs.all_changed_filess }}
         run: |
-          for file in ${ALL_CHANGED_FILESS}; do
+          for file in $ALL_CHANGED_FILESS; do
             echo "$file was changed"
           done
