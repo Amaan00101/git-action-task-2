@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'abc/\*\*/\*'
-      - '123/\*\*/\*'
+      - 'abc/**'
+      - '123/**'
 
 jobs:
   folder_abc:
