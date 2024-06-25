@@ -2,14 +2,15 @@ name: Folder-specific Workflows
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'abc/\*\*/\*'
+      - '123/\*\*/\*'
 
 jobs:
   folder_abc:
     name: ABC Folder Workflow
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.modified, 'abc/**') }}
+    if: contains(github.event.head_commit.modified, 'abc/.json')
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
