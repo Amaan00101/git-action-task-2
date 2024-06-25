@@ -45,12 +45,12 @@ jobs:
         uses: tj-actions/changed-files@v44
         with:
           files: |
-            '123/**'
+            123/**
 
       - name: List all changed files
         if: steps.changed-filess.outputs.any_changed == 'true'
         env:
-          ALL_CHANGED_FILESS: ${{ steps.changed-filess.outputs.all_changed_filess }}
+          ALL_CHANGED_FILESS: ${{ steps.changed-filess.outputs.all_changed_files }}
         run: |
           for file in $ALL_CHANGED_FILESS; do
             echo "$file was changed"
