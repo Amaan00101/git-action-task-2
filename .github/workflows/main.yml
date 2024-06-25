@@ -10,25 +10,26 @@ on:
 
 jobs:
   folder_abc:
-    name: ABC Folder Workflow
+    name: abc folder
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get all changed markdown files
-        id: changed-markdown-files
+      - name: changed files
+        id: changed-files
         uses: tj-actions/changed-files@v44
         with:
           files: |
             abc/**
 
-      - name: List all changed markdown files
-        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+      - name: List all changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
         env:
-          ALL_CHANGED_FILES: ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           for file in $ALL_CHANGED_FILES; do
+            echo "changes done in abc folder"
             echo "$file was changed"
           done
 
@@ -39,17 +40,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get all changed markdown files
-        id: changed-markdown-filess
+      - name: Get all changed files
+        id: changed-filess
         uses: tj-actions/changed-files@v44
         with:
           files: |
             123/**
 
-      - name: List all changed markdown files
-        if: steps.changed-markdown-filess.outputs.any_changed == 'true'
+      - name: List all changed files
+        if: steps.changed-filess.outputs.any_changed == 'true'
         env:
-          ALL_CHANGED_FILESS: ${{ steps.changed-markdown-filess.outputs.all_changed_filess }}
+          ALL_CHANGED_FILESS: ${{ steps.changed-filess.outputs.all_changed_filess }}
         run: |
           for file in $ALL_CHANGED_FILESS; do
             echo "$file was changed"
