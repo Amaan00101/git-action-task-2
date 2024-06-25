@@ -2,6 +2,8 @@ name: Folder-specific Workflows
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'abc/\*\*/\*'
       - '123/\*\*/\*'
