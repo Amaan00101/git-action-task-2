@@ -10,47 +10,48 @@ on:
 
 jobs:
   folder_abc:
-    - name: abc folder
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
+    name: abc folder
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-        - name: changed files
-          id: changed-files
-          uses: tj-actions/changed-files@v44
-          with:
-            files: |
-              abc/**
+      - name: changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            abc/**
 
-        - name: List all changed files
-          if: steps.changed-files.outputs.any_changed == 'true'
-          env:
-            ALL_CHANGES: ${{ steps.changed-files.outputs.all_changed_files }}
-          run: |
-            for file in $ALL_CHANGES; do
-              echo "changes done in abc folder"
-              echo "$file was changed"
-            done
+      - name: List all changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGES: ${{ steps.changed-files.outputs.all_changed_files }}
+        run: |
+          for file in $ALL_CHANGES; do
+            echo "changes done in abc folder"
+            echo "$file was changed"
+          done
 
-    - name: 123 folder
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v2
+  folder_123:
+    name: 123 Folder Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-        - name: Get all changed files
-          id: changed-filess
-          uses: tj-actions/changed-files@v44
-          with:
-            files: |
-              123/**
+      - name: Get all changed files
+        id: changed-filess
+        uses: tj-actions/changed-files@v44
+        with:
+          files: |
+            123/**
 
-        - name: List all changed files
-          if: steps.changed-filess.outputs.any_changed == 'true'
-          env:
-            ALL_CHANGESS: ${{ steps.changed-filess.outputs.all_changed_files }}
-          run: |
-            for file in $ALL_CHANGESS; do
-              echo "$file was changed"
-            done
+      - name: List all changed files
+        if: steps.changed-filess.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGESS: ${{ steps.changed-filess.outputs.all_changed_files }}
+        run: |
+          for file in $ALL_CHANGESS; do
+            echo "$file was changed"
+          done 
